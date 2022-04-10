@@ -1,0 +1,68 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="post-box"><!--Post begins here-->
+    {% for post in posts %}
+    <div class="col-md-12">
+        <div class="card card-blog">
+            <div class="card-img">
+                <a href="{% url 'blog:blog_detail' post.pk %}"><img
+                        src="/{{post.img}}" alt="" class="img-fluid"></a>
+            </div>
+            <div class="card-body">
+                <div class="card-category-box">
+                    <div class="card-category">
+                        <h6 class="category">{{post.category}}</h6>
+                    </div>
+                </div>
+                <h3 class="card-title"><a
+                        href="{% url 'blog:blog_detail' post.id %}">{{post.title}}</a>
+                </h3>
+                <p class="card-description">
+                    <small>{{post.body|slice:":200"}}...</small>
+                </p>
+            </div>
+            <div class="card-footer">
+                <div class="post-author">
+                    <a href="#">
+                        <img src="{% static 'assets/img/testimonial-2.jpg' %}" alt=""
+                             class="avatar rounded-circle">
+                        <span class="author">{{post.author}}</span>
+                    </a>
+                </div>
+                <div class="post-date">
+                    <span class="ion-ios-clock-outline"></span> {{post.updated}}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    <div class="col-md-12 text-center">
+        <div class="card card-blog">
+            <div class="card-img">
+                {% if posts.has_other_pages %}
+                {% if posts.has_previous %}
+                <a href="?page=1"><i style=""> first </i> </a>
+                <a href=" ?page={{ posts.previous_page_number }}"> <i style=""> previous </i></a>
+                {% endif %}
+                {% for num in posts.paginator.page_range %}
+                {% if posts.number == num %}
+                    <button class="btn-default" style="background:transparent;border-color:transparent;box-shadow:0 0 4px black;">{{num}}</button>
+                {% elif num > posts.number|add:'-3' and num < posts.number|add:'3' %}
+                <a href="?page={{num}}">
+                    <button class="btn-default" style="background:transparent;border-color:transparent;box-shadow:0 0 4px black inset;">{{num}}</button>
+                </a>
+                {% endif %}
+                {% endfor %}
+                {% if posts.has_next %}
+                <a href="?page={{ posts.next_page_number }}"><i style=""> next </i></a>
+                <a href="?page={{ posts.paginator.num_pages }}"><i style="">last </i> </a>
+                {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+</div><!--Post ends here-->
+{% endblock content %}

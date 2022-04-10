@@ -1,0 +1,238 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="post-box">
+    <div class="post-thumb">
+        <img src="/{{post.img}}" class="img-fluid" alt="">
+    </div>
+    <div class="post-meta">
+        <h1 class="article-title">{{post.title}}</h1>
+        <ul>
+            <li>
+                <span class="ion-ios-person"></span>
+                <a href="#">{{post.user}}</a>
+            </li>
+            <li>
+                <span class="ion-pricetag"></span>
+                <a href="#">{{post.category}}</a>
+            </li>
+            <li>
+                <span class="ion-chatbox"></span>
+                <a href="#">{{comments.all.count}}</a>
+            </li>
+        </ul>
+    </div>
+    <div class="article-content">
+        <p class="text-justify">
+            {{post.body}}
+        </p>
+        <p>
+            <button type="button" class="button-rouded" id="postLikeButton" name="{{post.slug}}" value="Like" token="{{ csrf_token }}" ><img
+                    src="{% static 'blog/images/like.png' %}" alt="" width="20"></button>
+            <small>{% if post.get_total_likes == 1 %} <span id="likeCounts"><b>{{post.get_total_likes}}</b></span> like{% elif post.get_total_likes > 1 %} <span id="likeCounts"><b>{{post.get_total_likes}}</b></span> likes{% endif %} <span id="likeStatement" class="text-info"></span></small>
+        </p>
+
+    </div>
+</div>
+<div class="box-comments">
+    <div class="title-box-2">
+        <h4 class="title-comments title-left">Comments ({{comments.all.count}})</h4>
+    </div>
+    <ul class="list-comments commentList" id="commentList">
+        {% for comment in comments %}
+            <li>
+                <div class="comment-avatar">
+                    <img src="/{{comment.author.biodata.profile_pic}}" alt="">
+                </div>
+                <div class="comment-details">
+                    <h4 class="comment-author">{{comment.author}}</h4>
+                    <span>{{comment.updated}}</span>
+                    <p>
+                        {{comment.body}}
+                    </p>
+                    <p>
+                        <button type="button" class="button-rouded" id="commentLikeButton" name="{{comment.slug}}" value="Like"><img
+                                src="{% static 'blog/images/like.png' %}" alt="" width="20"></button>
+                        <small>{% if comment.get_total_likes == 1 %}
+                            <b><span id="commentLikeCounts{{comment.id}}">{{comment.get_total_likes}}</span></b> like
+                            {% elif comment.get_total_likes > 1 %} <span id="commentLikeCounts{{comment.id}}"><b>{{comment.get_total_likes}}</b></span> likes
+                            {% endif %} <span id="commentLikeStatement{{comment.id}}" class="text-info"></span></small>
+                        <span id="showReply" name="{{comment.id}}">Reply</span>
+                    </p>
+
+                    <div class="form-group co-xs-3 d-none" id="replyDiv{{comment.id}}">
+                        <form data-url="{% url 'blog:comment' %}" method="POST" class="input-group" id="replyForm{{comment.id}}">
+                            <img src='/{{request.user.biodata.profile_pic.url}}' style='width:50px;' class='button-rouded' >
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <input type="hidden" class="form-control input-mf" name="post_id"
+                                       value="{{post.pk}}" required>
+                                <input type="hidden" class="form-control input-mf" name="parent_id"
+                                       value="{{comment.pk}}" required>
+                                <input type="hidden" class="form-control input-mf" name="author_id"
+                                       value="{{request.user.id}}" required>
+                            </div>
+                            <input type="text" id="commentReply{{comment.id}}" name="{{comment.slug}}" class="form-control" placeholder="Reply..." required="true">
+                            <button id="replyButton" name="{{comment.id}}" class="btn btn-secondary" type="submit">Send...</button>
+                        </form>
+                    </div>
+                </div>
+            </li>
+
+            <li class="comment-children text-primary" style="padding:0px;">
+                <i><small><b>{% if comment.replies.all.count == 1 %}{{ comment.replies.all.count }} reply{% elif comment.replies.all.count > 1 %}{{ comment.replies.all.count }} replies{% endif %}</b></small></i>
+            </li>
+            <span id="commentList{{comment.id}}">
+            {% for reply in comment.replies.all %}
+                <li class="comment-children">
+                    <div class="comment-avatar">
+                        <img src="/{{reply.author.biodata.profile_pic}}" alt="">
+                    </div>
+                    <div class="comment-details">
+                        <h4 class="comment-author">{{reply.author}}</h4>
+                        <span>{{reply.updated}}</span>
+                        <p>
+                            {{reply.body}}
+                        </p>
+                        <p>
+                        <button type="button" class="button-rouded" id="commentLikeButton" name="{{reply.slug}}" value="Like"><img
+                                src="{% static 'blog/images/like.png' %}" alt="" width="20"></button>
+                        <small>{% if reply.get_total_likes == 1 %}
+                            <b><span id="commentLikeCounts{{reply.id}}">{{reply.get_total_likes}}</span></b> like
+                            {% elif reply.get_total_likes > 1 %} <span id="commentLikeCounts{{reply.id}}"><b>{{reply.get_total_likes}}</b></span> likes
+                            {% endif %} <span id="commentLikeStatement{{reply.id}}" class="text-info"></span></small>
+                        <span id="showReply" name="{{reply.id}}">Reply</span>
+                    </p>
+
+                    <div class="form-group co-xs-3 d-none" id="replyDiv{{reply.id}}">
+                        <form action="" class="input-group">
+                            <img src="/{{request.user.biodata.profile_pic.url}}" alt="" style="width:40px;margin:2px;" class="button-rouded">
+                            <input type="text" id="commentReply" name="reply.id" class="form-control" placeholder="Reply..."><button id="replyButton" type="submit" class="btn btn-secondary" >Send...</button>
+                        </form>
+                    </div>
+                    </div>
+                </li>
+            {% endfor %}
+            </span>
+        {% endfor %}
+
+    </ul>
+</div>
+<div class="form-comments">
+    <div class="title-box-2">
+        <h3 class="title-left">
+            Leave a Comment
+        </h3>
+    </div>
+    <form data-url ="{% url 'blog:comment' %}" method="POST" class="form-mf commentForm" id="commentForm">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <div class="form-group">
+                    <input type="hidden" class="form-control input-mf" name="post_id"
+                           value="{{post.pk}}" required>
+                    <input type="hidden" class="form-control input-mf" name="author_id"
+                           value="{{request.user.id}}" required>
+                </div>
+            </div>
+
+            <div class="col-md-12 mb-3">
+                <div class="form-group">
+                    {{comment.body}}
+                </div>
+            </div>
+            <div class="col-md-12">
+                <button id="commentButton" class="button button-a button-big button-rouded submit">Send
+                    Message
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="{% static 'BOOTSTRAP/js/jquery2.js' %}"></script>
+
+{% endblock content %}
+
+{% block javascriptcode %}
+    <script>
+
+         $(document).ready(function(){
+            $(document).on('click', '#showReply', function(e){
+                e.preventDefault();
+                $('#replyDiv' + $(this).attr('name')).removeClass('d-none');
+            });
+
+            $(document).on('submit', '#commentForm', function(e){
+                e.preventDefault();
+                var serializedData = $("#commentForm").serialize();
+                $.ajax({
+                    type:'post',
+                    url: $("#commentForm").data('url'),
+                    data: serializedData,
+                    success: function(response){
+                        $("#commentList").append('<li><div class="comment-avatar"><img src="/'+response['picture']+'" alt=""></div><div class="comment-details"><h4 class="comment-author">'+response['author']+'</h4><span>'+response['created']+'<br>Just now </span><p>'+response['body']+'</p><a href="3">Reply</a></div></li>')
+                    },
+                    error: function(data){
+                        alert(response["responseJSON"]["error"]);
+                        }
+                });
+            });
+
+
+            $(document).on('click', '#postLikeButton', function(e){
+                e.preventDefault();
+                $.ajax({
+                    type:'post',
+                    url: "{% url 'blog:post_like' %}",
+                    data: {'slug':$(this).attr('name'),'csrfmiddlewaretoken':"{{ csrf_token }}"},
+                    success: function(response){
+                        $('#likeStatement').text(response.message + ' ')
+                        $('#likeCounts').text(response.likes_count)
+                    },
+                    error: function(data){
+                        alert(response["responseJSON"]["error"]);
+                        }
+                });
+            });
+
+
+            $(document).on('click', '#commentLikeButton', function(e){
+                e.preventDefault();
+                $.ajax({
+                    type:'post',
+                    url: "{% url 'blog:comment_like' %}",
+                    data: {'slug':$(this).attr('name'),'csrfmiddlewaretoken':"{{ csrf_token }}"},
+                    success: function(response){
+                        $('#commentLikeStatement' + response.comment_id).text(response.message + ' ')
+                        $('#commentLikeCounts' + response.comment_id).text(response.likes_count)
+                    },
+                    error: function(data){
+                        alert(response["responseJSON"]["error"]);
+                        }
+                });
+            });
+
+             $(document).on('click', '#replyButton', function(e){
+                e.preventDefault();
+                id_ = $(this).attr('name');
+                var serializedData = $("#replyForm" + id_).serialize();
+                $.ajax({
+                    type:'post',
+                    url: $("#commentForm" + id_).data('url'),
+                    data: serializedData,
+                    success: function(response){
+                        alert('success');
+                        $("#commentList").append('<li><div class="comment-avatar"><img src="/'+response['picture']+'" alt=""></div><div class="comment-details"><h4 class="comment-author">'+response['author']+'</h4><span>'+response['created']+'<br>Just now </span><p>'+response['body']+'</p><a href="3">Reply</a></div></li>')
+                    },
+                    error: function(data){
+                        alert('fail');
+                        alert(response["responseJSON"]["error"]);
+                        }
+                });
+             });
+
+        });
+
+    </script>
+{% endblock javascriptcode %}

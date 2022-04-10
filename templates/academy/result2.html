@@ -1,0 +1,350 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<!-- META ============================================= -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="keywords" content="" />
+	<meta name="author" content="" />
+	<meta name="robots" content="" />
+
+	<!-- DESCRIPTION -->
+	<meta name="description" content="Daysman Scientia College" />
+
+	<!-- OG -->
+	<meta property="og:title" content="Daysman Scientia College" />
+	<meta property="og:description" content="Daysman Scientia College" />
+	<meta property="og:image" content="" />
+	<meta name="format-detection" content="telephone=no">
+
+	<!-- FAVICONS ICON ============================================= -->
+	<link rel="icon" href="{% static 'assets/images/favicon.ico' %}" type="image/x-icon" />
+	<link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/images/favicon.png' %}" />
+
+	<!-- PAGE TITLE HERE ============================================= -->
+	<title>Daysman Scientia College: Student Termly Report </title>
+
+	<!-- MOBILE SPECIFIC ============================================= -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!--[if lt IE 9]>
+	<script src="{% static 'assets/js/html5shiv.min.js' %}"></script>
+	<script src="{% static 'assets/js/respond.min.js' %}"></script>
+	<![endif]-->
+
+	<!-- All PLUGINS CSS ============================================= -->
+	<link rel="stylesheet" type="text/css" href="{% static 'assets/css/assets.css' %}">
+
+	<!-- TYPOGRAPHY ============================================= -->
+	<link rel="stylesheet" type="text/css" href="{% static 'assets/css/typography.css' %}">
+
+	<!-- SHORTCODES ============================================= -->
+	<link rel="stylesheet" type="text/css" href="{% static 'assets/css/shortcodes/shortcodes.css' %}">
+
+	<!-- STYLESHEETS ============================================= -->
+	<link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}">
+	<link class="skin" rel="stylesheet" type="text/css" href="{% static 'assets/css/color/color-1.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendors/bootstrap/css/bootstrap.min.css' %}">
+	<style>
+		.vtc{writing-mode:vertical-rl;text-orientation:mixed;}
+	</style>
+</head>
+<body id="bg" class="bg-dark">
+<div class="page-wraper">
+<div id="loading-icon-bx"></div>
+
+    <!-- Content -->
+    <div class="page-content" style="line-height:16px">
+        <div class="col-md-8 offset-md-2 bg-light mt-3 p-3">
+			<p class="text-center">
+				<center><h1 style="text-border:1px solid black;color:#008080;"><b>
+					DAYMAN SCIENTIA COLLEGE
+				</b></h1></center>
+			</p>
+			<div class="text-center">
+			<p style="line-height:8px;">
+				<h4>IJEBU IGBO</h4>
+			</p>
+			<p style="line-height:8px;">
+				<h4><b>Bridging the G-A-P</b></h4>
+			</p>
+			<div class="row">
+				<div class="col text-center">{{student_level}} REPORT SHEET </div>
+			</div>
+			</div>
+
+
+			<b>A. GENERAL INFORMATION</b>
+			<div style="border: 1px solid black;" class="p-1">
+				<p class="text-justify">
+				<table class="table">
+				<tr>
+					<td>Name: <u><b>{{request.user.last_name}} {{request.user.first_name}}</b></u></td>
+					<td>Class: <u><b>{{class}}</b></u>	</td>
+					<td>Student ID: {{request.user.id}}</td-->
+				</tr>
+				<tr>
+					<td>No. of Times School Opened: {{profile.no_open}}</td>
+					<td>No. of Times Present: {{profile.no_present}}</td>
+					<td>No. of Times Absent: {{profile.no_absent}}</td>
+				</tr>
+				<tr>
+					<td>Total Marks Obtainable: {{total_obtainable}}</td>
+					<td>Total Marks Obtained: {{total_obtained}}</td>
+					<td>Learner’s Overall Average: {{l_overall_avg}}</td>
+				</tr>
+				<tr>
+					<td>Overall Highest Class Average: {{highest_class_avg}}</td>
+					<td>Overall Lowest Class Average: {{lowest_class_avg}}</td>
+					<td>Overall Class Average: {{overall_avg}}</td>
+				</tr>
+			</table>
+			</div>
+			<b>B. CONDUCT</b>
+			<table border="1">
+				<tr>
+					<td>Special Report during the Term</td>
+				</tr>
+				<tr>
+					<td>Comments:</td>
+				</tr>
+			</table>
+			<b>C. PERFORMANCE IN SUBJECTS</b>
+			<table class="table table-condensed table-hover">
+				<thead>
+				<tr>
+					<th></th>
+					<th class="vtc">Max. <br> Score</th>
+					<th class="vtc">ENG</th>
+					<th class="vtc">MAT</th>
+					<th class="vtc">MKT</th>
+					<th class="vtc">BIO</th>
+					<th class="vtc">ECO</th>
+					<th class="vtc">LIT</th>
+					<th class="vtc">PHY</th>
+					<th class="vtc">CRS</th>
+					<th class="vtc">GOV</th>
+					<th class="vtc">BST</th>
+					<th class="vtc">CVC</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+					<td>Continuous Ass.</td>
+					<td>40</td>
+					<td>{{eng.cont_ass}}</td>
+					<td>{{math.cont_ass}}</td>
+					<td>{{mkt.cont_ass}}</td>
+					<td>{{bio.cont_ass}}</td>
+					<td>{{eco.cont_ass}}</td>
+					<td>{{lit.cont_ass}}</td>
+					<td>{{phy.cont_ass}}</td>
+					<td>{{crs.cont_ass}}</td>
+					<td>{{gov.cont_ass}}</td>
+					<td>{{chm.cont_ass}}</td>
+					<td>{{cvc.cont_ass}}</td>
+				</tr>
+				<tr>
+					<td>Exam.</td>
+					<td>60</td>
+					<td>{{eng.examination}}</td>
+					<td>{{math.examination}}</td>
+					<td>{{mkt.examination}}</td>
+					<td>{{bio.examination}}</td>
+					<td>{{eco.examination}}</td>
+					<td>{{lit.examination}}</td>
+					<td>{{phy.examination}}</td>
+					<td>{{crs.examination}}</td>
+					<td>{{gov.examination}}</td>
+					<td>{{chm.examination}}</td>
+					<td>{{cvc.examination}}</td>
+				</tr>
+				<tr>
+					<td>Total Score</td>
+					<td>100</td>
+					<td>{{eng.total_score}}</td>
+					<td>{{math.total_score}}</td>
+					<td>{{mkt.total_score}}</td>
+					<td>{{bio.total_score}}</td>
+					<td>{{eco.total_score}}</td>
+					<td>{{lit.total_score}}</td>
+					<td>{{phy.total_score}}</td>
+					<td>{{crs.total_score}}</td>
+					<td>{{gov.total_score}}</td>
+					<td>{{chm.total_score}}</td>
+					<td>{{cvc.total_score}}</td>
+				</tr>
+			<!---	<tr>
+					<td>2nd Term Score</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>1st Term Score</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr> -->
+				<tr>
+					<td><b>Grade</b></td>
+					<td></td>
+					<td>{{eng_grade}}</td>
+					<td>{{math_grade}}</td>
+					<td>{{mkt_grade}}</td>
+					<td>{{bio_grade}}</td>
+					<td>{{eco_grade}}</td>
+					<td>{{lit_grade}}</td>
+					<td>{{phy_grade}}</td>
+					<td>{{crs_grade}}</td>
+					<td>{{gov_grade}}</td>
+					<td>{{chm_grade}}</td>
+					<td>{{cvc_grade}}</td>
+				</tr>
+				<tr>
+					<td>Highest in Class</td>
+					<td></td>
+					<td>{{eng_max}}</td>
+					<td>{{math_max}}</td>
+					<td>{{mkt_max}}</td>
+					<td>{{bio_max}}</td>
+					<td>{{eco_max}}</td>
+					<td>{{lit_max}}</td>
+					<td>{{phy_max}}</td>
+					<td>{{crs_max}}</td>
+					<td>{{gov_max}}</td>
+					<td>{{chm_max}}</td>
+					<td>{{cvc_max}}</td>
+				</tr>
+				<tr>
+					<td>Lowest in Class</td>
+					<td></td>
+					<td>{{eng_min}}</td>
+					<td>{{math_min}}</td>
+					<td>{{mkt_min}}</td>
+					<td>{{bio_min}}</td>
+					<td>{{eco_min}}</td>
+					<td>{{lit_min}}</td>
+					<td>{{phy_min}}</td>
+					<td>{{crs_min}}</td>
+					<td>{{gov_min}}</td>
+					<td>{{chm_min}}</td>
+					<td>{{cvc_min}}</td>
+				</tr>
+				<tr>
+					<td>Class Average</td>
+					<td></td>
+					<td>{{eng_avg}}</td>
+					<td>{{math_avg}}</td>
+					<td>{{mkt_avg}}</td>
+					<td>{{bio_avg}}</td>
+					<td>{{eco_avg}}</td>
+					<td>{{lit_avg}}</td>
+					<td>{{phy_avg}}</td>
+					<td>{{crs_avg}}</td>
+					<td>{{gov_avg}}</td>
+					<td>{{chm_avg}}</td>
+					<td>{{cvc_avg}}</td>
+				</tr>
+				<tr>
+					<td>Learner’s Position</td>
+					<td></td>
+					<td>{{eng_pos}}</td>
+					<td>{{math_pos}}</td>
+					<td>{{mkt_pos}}</td>
+					<td>{{bio_pos}}</td>
+					<td>{{eco_pos}}</td>
+					<td>{{lit_pos}}</td>
+					<td>{{phy_pos}}</td>
+					<td>{{crs_pos}}</td>
+					<td>{{gov_pos}}</td>
+					<td>{{chm_pos}}</td>
+					<td>{{cvc_pos}}</td>
+				</tr>
+				</tbody>
+			</table>
+			<div class="row">
+				<div class="col col-md-10
+">
+					<div class="">
+						<table class="table">
+							<tr>
+								<td>Class Teacher’s Comment:</td>
+								<td>Put more effort next term {{request.user.first_name}}}</td>
+							</tr>
+							<tr>
+								<td>Principal’s Remark:</td>
+								<td>Try harder, this is not the best you can do</td>
+							</tr>
+							<tr>
+								<td>Date: </td>
+								<td>{% now "SHORT_DATETIME_FORMAT" %}</td>
+							</tr>
+						</table>
+
+					  <br>
+
+					</div>
+				</div>
+				<div class="col">
+					<img src="{% static 'assets/images/code_202203252122588.png' %}" alt="" style="height:100px;">
+				</div>
+			</div>
+			<input type="button" onclick="window.print()" value="Print" class="btn btn-outline-dark">
+		</div>
+
+    </div>
+    <!-- Content END-->
+
+</div>
+<!-- External JavaScripts -->
+<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+<script src="{% static 'assets/vendors/bootstrap/js/popper.min.js' %}"></script>
+<script src="{% static 'assets/vendors/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'assets/vendors/bootstrap-select/bootstrap-select.min.js' %}"></script>
+<script src="{% static 'assets/vendors/bootstrap-touchspin/jquery.bootstrap-touchspin.js' %}"></script>
+<script src="{% static 'assets/vendors/magnific-popup/magnific-popup.js' %}"></script>
+<script src="{% static 'assets/vendors/counter/waypoints-min.js' %}"></script>
+<script src="{% static 'assets/vendors/counter/counterup.min.js' %}"></script>
+<script src="{% static 'assets/vendors/imagesloaded/imagesloaded.js' %}"></script>
+<script src="{% static 'assets/vendors/masonry/masonry.js' %}"></script>
+<script src="{% static 'assets/vendors/masonry/filter.js' %}"></script>
+<script src="{% static 'assets/vendors/owl-carousel/owl.carousel.js' %}"></script>
+<script src="{% static 'assets/js/functions.js' %}"></script>
+<script src="{% static 'assets/js/contact.js' %}"></script>
+<script>
+		function printDiv(divName){
+			var printContents = document.getElementById(divName).innerHTML;
+			var originalContents = document.body.innerHTML;
+
+			document.body.innerHTML = printContents;
+			window.print();
+
+			document.body.innerHTML = originalContents;
+		}
+	</script>
+</body>
+
+</html>

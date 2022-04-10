@@ -1,0 +1,26 @@
+{% load crispy_forms_tags %}
+
+{% block content %}
+{% if result %}
+
+
+<div id="#top">
+
+    <div style="background:#006666;box-shadow:0 0 5px black;padding:10px;">
+        {% if result.video %}
+            <video controls preload="metadata" class="img-rounded" >
+                <source src="/{{result.video.url}}" type="video/{{result.video_type}}">
+            </video>
+        {% endif %}
+
+        <h1 >{{result.task}}</h1>
+        <p class="" style="padding:10px;color#fafbfc;">{{result.howto}}</p>
+         <center ><i class="text-white"><a href="#top"> Goto Top </a></i>  </center>
+ </div>
+</div>
+
+
+{% endif %}
+
+
+{% endblock content %}

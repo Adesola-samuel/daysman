@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+    <div class="col col-md-8 col-md-offset-2 text-light" style="box-shadow:0 0 5px #fafcfd;margin:0 auto;background:#006666;opacity:0.7;" >
+
+            <form method="POST" action="" autocomplete="off">
+                {% csrf_token %}
+            <div id="sign_up" >
+                <table class="table text-white">
+                    <tr>
+                        <td>
+                            {{ form.first_name|as_crispy_field}}
+                        </td>
+                        <td>
+                            {{ form.last_name|as_crispy_field}}
+                        </td>
+                        <td>
+                            {{ form.username|as_crispy_field}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>{{ form.email|as_crispy_field}}</td>
+                        <td>{{ form.password1|as_crispy_field}}</td>
+                        <td>{{ form.password2|as_crispy_field}}</td>
+                    </tr>
+                </table>
+
+                    <input type="submit" value="Sign up" class="btn btn-default btn-block us-btn" style="margin:2px;">
+
+                </div>
+                <center> <b><a href="{% url 'user_auth:login' %}"><span style="color:#fafcfd;">Login</span></a></b> </center>
+                <center> <b><a href="{% url 'user_auth:create_user' %}"> <span style="color:#fafcfd;">Reload Form</span> </a></b> </center>
+            </form>
+
+
+    </div>
+
+{% endblock content %}
+

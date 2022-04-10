@@ -1,0 +1,57 @@
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="responsive">
+    <div class="row">
+        <div class="col col-md-4 jumbotron sc-div" style="background:#006666;">
+            <form method='GET' action=".">
+                {% csrf_token %}
+                <p class="text-white">
+                <h2 class="sc-hd">Our Help Center</h2></p>
+                <i class="text-white">Enter to search for help</i><br>
+                <input type="text" class='control sc-text' name="q" placeholder="Search..." class="control"/>
+                <button type="submit" class="sch-btn"><i class="fa fa-search"></i>Search</i></button>
+            </form>
+        </div>
+    </div>
+    <div class="row text-light">
+        <div class="col col-md-8 text-center" style="padding:20px;margin:5px auto;">
+            {% if no_result %}
+
+            <p>No result match for this search</p>
+            {% elif results %}
+            <b><p>{{results.count}} search results</p></b>
+
+
+            {% for item in results %}
+            <div style="background:white;color:blue;margin:4px;box-shadow: 0 0 2px black;" class="well">
+                <div><a href="{% url 'loan:help_detail' item.id %}"><b class=" text-light">{{ item.task }}</b></a> <br>
+                    <span style="color:black;">{{item.howto|slice:":200"}}...</span></div>
+            </div>
+            {% endfor %}
+
+            {% endif %}
+            <p class="text-center">
+                {% if predictions.has_previous %}
+                <a href="?page=1"> <i class="test-info"> first </i> </a>
+                <a href="?page={{ predictions.previous_page_number }}"> <i class=" text-light"> previous </i> </a>
+                {% endif %}
+
+                {% for num in predictions.paginator.page_range %}
+                {% if post.number == num %}
+                <button class="btn-info active" style="margin:1px;">{{ num }}</button>
+                {% elif num > predictions.number|add:'-3' and num < predictions.number|add:'3' %}
+                <button class="btn-info" style="margin:1px;">{{ num }}</button>
+                {% endif %}
+                {% endfor %}
+
+                {% if predictions.has_next %}
+                <a href="?page={{predictions.next_page_number}}"> <i class=" text-light"> next </i> </a>
+                <a href="?page={{ predictions.paginator.num_pages }}"> <i class=" text-light"> last </i> </a>
+                {% endif %}
+            </p>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

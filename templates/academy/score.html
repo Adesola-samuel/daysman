@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container">
+    {% if form %}  
+    <form action = "{% url 'academy:set_score' %}" method="POST">    
+        {% csrf_token %}
+        <!-- FOR SINGLE FORM -->
+          
+            <div class="row">
+                {% for field in form %}
+                <div class="col">{{field|as_crispy_field}}</div>
+                {% endfor %}
+            </div>
+            <div class="row">
+                <div class="col"><input type="submit" class="btn  btn-danger" value="Submit"></div>
+    
+            </div>
+        </form>
+    {% endif %}
+
+        <!-- FOR MULTIPLLE FORMS -->
+    {% if formset %}
+    <form action = "{% url 'academy:submit_score' %}" method="POST">  
+        {% csrf_token %}  
+            <!-- FOR SINGLE FORM -->
+        {{ formset.management_form|crispy }}
+            {% for form in formset %}
+                <div class="row">
+                    {% for field in form %}
+                    <div class="col">{{field|as_crispy_field}}</div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+            <div class="row">
+                <div class="col"><input type="submit" class="btn  btn-danger" value="Submit"></div>
+    
+            </div>
+        </form>
+    {% endif %}
+    {% if response %}
+        <p class="lead">{{response}}</p>
+        <p class="lead"><a href="{% url 'academy:pre_score' %}">ENTER SCORE SHEET</a></p>
+    {% endif %}
+    {% if errors %}
+    <div class="container">
+    <ul>
+        {% for error in errors %}
+            <li class="text-danger">{{error}}</li>
+        {% endfor %}
+    </ul>
+    </div>
+    {% endif %}
+
+</div>
+{% endblock content %}

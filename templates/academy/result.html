@@ -1,0 +1,370 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<!-- META ============================================= -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="keywords" content="" />
+	<meta name="author" content="" />
+	<meta name="robots" content="" />
+
+	<!-- DESCRIPTION -->
+	<meta name="description" content="Daysman Scientia College" />
+
+	<!-- OG -->
+	<meta property="og:title" content="Daysman Scientia College" />
+	<meta property="og:description" content="Daysman Scientia College" />
+	<meta property="og:image" content="" />
+	<meta name="format-detection" content="telephone=no">
+
+	<!-- FAVICONS ICON ============================================= -->
+	<link rel="icon" href="{% static 'assets/images/favicon.ico' %}" type="image/x-icon" />
+	<link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/images/favicon.png' %}" />
+
+	<!-- PAGE TITLE HERE ============================================= -->
+	<title>Daysman Scientia College: Student Termly Report </title>
+
+	<!-- MOBILE SPECIFIC ============================================= -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!--[if lt IE 9]>
+	<script src="{% static 'assets/js/html5shiv.min.js' %}"></script>
+	<script src="{% static 'assets/js/respond.min.js' %}"></script>
+	<![endif]-->
+
+	<!-- All PLUGINS CSS ============================================= -->
+	<link rel="stylesheet" type="text/css" href="{% static 'assets/css/assets.css' %}">
+
+	<!-- TYPOGRAPHY ============================================= -->
+	<link rel="stylesheet" type="text/css" href="{% static 'assets/css/typography.css' %}">
+
+	<!-- SHORTCODES ============================================= -->
+	<link rel="stylesheet" type="text/css" href="{% static 'assets/css/shortcodes/shortcodes.css' %}">
+
+	<!-- STYLESHEETS ============================================= -->
+	<link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}">
+	<link class="skin" rel="stylesheet" type="text/css" href="{% static 'assets/css/color/color-1.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendors/bootstrap/css/bootstrap.min.css' %}">
+	<style>
+		.vtc{writing-mode:vertical-rl;text-orientation:mixed;}
+	</style>
+</head>
+<body id="bg" class="bg-dark">
+<div class="page-wraper">
+<div id="loading-icon-bx"></div>
+
+    <!-- Content -->
+    <div class="page-content" style="line-height:16px">
+        <div class="col-md-8 offset-md-2 bg-light mt-3 p-3">
+			<p class="text-center">
+				<center><h1 style="text-border:1px solid black;color:#008080;"><b>
+					DAYMAN SCIENTIA COLLEGE
+				</b></h1></center>
+			</p>
+			<div class="text-center">
+			<p style="line-height:8px;">
+				<h4>IJEBU IGBO</h4>
+			</p>
+			<p style="line-height:8px;">
+				<h4><b>Bridging the G-A-P</b></h4>
+			</p>
+			<div class="row">
+				<div class="col text-center">{{student_level}} REPORT SHEET </div>
+			</div>
+			</div>
+
+
+			<b>A. GENERAL INFORMATION</b>
+			<div style="border: 1px solid black;" class="p-1">
+				<p class="text-justify">
+				<table class="table">
+				<tr>
+					<td>Name: <u><b>{{request.user.last_name}} {{request.user.first_name}}</b></u></td>
+					<td>Class: <u><b>{{class}}</b></u>	</td>
+					<td>Student ID: {{request.user.id}}</td-->
+				</tr>
+				<tr>
+					<td>No. of Times School Opened: {{profile.no_open}}</td>
+					<td>No. of Times Present: {{profile.no_present}}</td>
+					<td>No. of Times Absent: {{profile.no_absent}}</td>
+				</tr>
+				<tr>
+					<td>Total Marks Obtainable: {{total_obtainable}}</td>
+					<td>Total Marks Obtained: {{total_obtained}}</td>
+					<td>Learner’s Overall Average: {{l_overall_avg}}</td>
+				</tr>
+				<tr>
+					<td>Overall Highest Class Average: {{highest_class_avg}}</td>
+					<td>Overall Lowest Class Average: {{lowest_class_avg}}</td>
+					<td>Overall Class Average: {{overall_avg}}</td>
+				</tr>
+			</table>
+			</div>
+			<b>B. CONDUCT</b>
+			<table border="1">
+				<tr>
+					<td>Special Report during the Term</td>
+				</tr>
+				<tr>
+					<td>Comments:</td>
+				</tr>
+			</table>
+			<b>C. PERFORMANCE IN SUBJECTS</b>
+			<table class="table table-condensed table-hover">
+				<thead>
+				<tr>
+					<th></th>
+					<th class="vtc">Max. <br> Score</th>
+					<th class="vtc">ENG</th>
+					<th class="vtc">MAT</th>
+					<th class="vtc">BUS</th>
+					<th class="vtc">CCA</th>
+					<th class="vtc">YOR</th>
+					<th class="vtc">HIS</th>
+					<th class="vtc">CRS</th>
+					<th class="vtc">PVS</th>
+					<th class="vtc">NVE</th>
+					<th class="vtc">BST</th>
+					<th class="vtc">MUS</th>
+					<th class="vtc">IGBO</th>
+					<th class="vtc">CVC</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+					<td>Continuous Ass.</td>
+					<td></td>
+					<td>{{eng.cont_ass}}</td>
+					<td>{{math.cont_ass}}</td>
+					<td>{{bus.cont_ass}}</td>
+					<td>{{cca.cont_ass}}</td>
+					<td>{{yor.cont_ass}}</td>
+					<td>{{his.cont_ass}}</td>
+					<td>{{crs.cont_ass}}</td>
+					<td>{{pvs.cont_ass}}</td>
+					<td>{{nve.cont_ass}}</td>
+					<td>{{bst.cont_ass}}</td>
+					<td>{{mus.cont_ass}}</td>
+					<td>{{igbo.cont_ass}}</td>
+					<td>{{cvc.cont_ass}}</td>
+				</tr>
+				<tr>
+					<td>Exam.</td>
+					<td></td>
+					<td>{{eng.examination}}</td>
+					<td>{{math.examination}}</td>
+					<td>{{bus.examination}}</td>
+					<td>{{cca.examination}}</td>
+					<td>{{yor.examination}}</td>
+					<td>{{his.examination}}</td>
+					<td>{{crs.examination}}</td>
+					<td>{{pvs.examination}}</td>
+					<td>{{nve.examination}}</td>
+					<td>{{bst.examination}}</td>
+					<td>{{mus.examination}}</td>
+					<td>{{igbo.examination}}</td>
+					<td>{{cvc.examination}}</td>
+				</tr>
+				<tr>
+					<td>Total Score</td>
+					<td></td>
+					<td>{{eng.total_score}}</td>
+					<td>{{math.total_score}}</td>
+					<td>{{bus.total_score}}</td>
+					<td>{{cca.total_score}}</td>
+					<td>{{yor.total_score}}</td>
+					<td>{{his.total_score}}</td>
+					<td>{{crs.total_score}}</td>
+					<td>{{pvs.total_score}}</td>
+					<td>{{nve.total_score}}</td>
+					<td>{{bst.total_score}}</td>
+					<td>{{mus.total_score}}</td>
+					<td>{{igbo.total_score}}</td>
+					<td>{{cvc.total_score}}</td>
+				</tr>
+			<!---	<tr>
+					<td>2nd Term Score</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>1st Term Score</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr> -->
+				<tr>
+					<td><b>Grade</b></td>
+					<td></td>
+					<td>{{eng_grade}}</td>
+					<td>{{math_grade}}</td>
+					<td>{{bus_grade}}</td>
+					<td>{{cca_grade}}</td>
+					<td>{{yor_grade}}</td>
+					<td>{{his_grade}}</td>
+					<td>{{crs_grade}}</td>
+					<td>{{pvs_grade}}</td>
+					<td>{{nve_grade}}</td>
+					<td>{{bst_grade}}</td>
+					<td>{{mus_grade}}</td>
+					<td>{{igbo_grade}}</td>
+					<td>{{cvc_grade}}</td>
+				</tr>
+				<tr>
+					<td>Highest in Class</td>
+					<td></td>
+					<td>{{eng_max}}</td>
+					<td>{{math_max}}</td>
+					<td>{{bus_max}}</td>
+					<td>{{cca_max}}</td>
+					<td>{{yor_max}}</td>
+					<td>{{his_max}}</td>
+					<td>{{crs_max}}</td>
+					<td>{{pvs_max}}</td>
+					<td>{{nve_max}}</td>
+					<td>{{bst_max}}</td>
+					<td>{{mus_max}}</td>
+					<td>{{igbo_max}}</td>
+					<td>{{cvc_max}}</td>
+				</tr>
+				<tr>
+					<td>Lowest in Class</td>
+					<td></td>
+					<td>{{eng_min}}</td>
+					<td>{{math_min}}</td>
+					<td>{{bus_min}}</td>
+					<td>{{cca_min}}</td>
+					<td>{{yor_min}}</td>
+					<td>{{his_min}}</td>
+					<td>{{crs_min}}</td>
+					<td>{{pvs_min}}</td>
+					<td>{{nve_min}}</td>
+					<td>{{bst_min}}</td>
+					<td>{{mus_min}}</td>
+					<td>{{igbo_min}}</td>
+					<td>{{cvc_min}}</td>
+				</tr>
+				<tr>
+					<td>Class Average</td>
+					<td></td>
+					<td>{{eng_avg}}</td>
+					<td>{{math_avg}}</td>
+					<td>{{bus_avg}}</td>
+					<td>{{cca_avg}}</td>
+					<td>{{yor_avg}}</td>
+					<td>{{his_avg}}</td>
+					<td>{{crs_avg}}</td>
+					<td>{{pvs_avg}}</td>
+					<td>{{nve_avg}}</td>
+					<td>{{bst_avg}}</td>
+					<td>{{mus_avg}}</td>
+					<td>{{igbo_avg}}</td>
+					<td>{{cvc_avg}}</td>
+				</tr>
+				<tr>
+					<td>Learner’s Position</td>
+					<td></td>
+					<td>{{eng_pos}}</td>
+					<td>{{math_pos}}</td>
+					<td>{{bus_pos}}</td>
+					<td>{{cca_pos}}</td>
+					<td>{{yor_pos}}</td>
+					<td>{{his_pos}}</td>
+					<td>{{crs_pos}}</td>
+					<td>{{pvs_pos}}</td>
+					<td>{{nve_pos}}</td>
+					<td>{{bst_pos}}</td>
+					<td>{{mus_pos}}</td>
+					<td>{{igbo_pos}}</td>
+					<td>{{cvc_pos}}</td>
+				</tr>
+				</tbody>
+			</table>
+			<div class="row">
+				<div class="col col-md-10
+">
+					<div class="">
+						<table class="table">
+							<tr>
+								<td>Class Teacher’s Comment:</td>
+								<td>Put more effort next term {{request.user.first_name}}}</td>
+							</tr>
+							<tr>
+								<td>Principal’s Remark:</td>
+								<td>Try harder, this is not the best you can do</td>
+							</tr>
+							<tr>
+								<td>Date: </td>
+								<td>{% now "SHORT_DATETIME_FORMAT" %}</td>
+							</tr>
+						</table>
+
+					  <br>
+
+					</div>
+				</div>
+				<div class="col">
+					<img src="{% static 'assets/images/code_202203252122588.png' %}" alt="" style="height:100px;">
+				</div>
+			</div>
+			<input type="button" onclick="window.print()" value="Print" class="btn btn-outline-dark">
+		</div>
+
+    </div>
+    <!-- Content END-->
+
+</div>
+<!-- External JavaScripts -->
+<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+<script src="{% static 'assets/vendors/bootstrap/js/popper.min.js' %}"></script>
+<script src="{% static 'assets/vendors/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'assets/vendors/bootstrap-select/bootstrap-select.min.js' %}"></script>
+<script src="{% static 'assets/vendors/bootstrap-touchspin/jquery.bootstrap-touchspin.js' %}"></script>
+<script src="{% static 'assets/vendors/magnific-popup/magnific-popup.js' %}"></script>
+<script src="{% static 'assets/vendors/counter/waypoints-min.js' %}"></script>
+<script src="{% static 'assets/vendors/counter/counterup.min.js' %}"></script>
+<script src="{% static 'assets/vendors/imagesloaded/imagesloaded.js' %}"></script>
+<script src="{% static 'assets/vendors/masonry/masonry.js' %}"></script>
+<script src="{% static 'assets/vendors/masonry/filter.js' %}"></script>
+<script src="{% static 'assets/vendors/owl-carousel/owl.carousel.js' %}"></script>
+<script src="{% static 'assets/js/functions.js' %}"></script>
+<script src="{% static 'assets/js/contact.js' %}"></script>
+<script>
+		function printDiv(divName){
+			var printContents = document.getElementById(divName).innerHTML;
+			var originalContents = document.body.innerHTML;
+
+			document.body.innerHTML = printContents;
+			window.print();
+
+			document.body.innerHTML = originalContents;
+		}
+	</script>
+</body>
+
+</html>
